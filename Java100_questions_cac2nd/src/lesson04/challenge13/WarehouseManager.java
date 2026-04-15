@@ -63,34 +63,43 @@ public class WarehouseManager {
 
 	public static void main(String[] args) throws IOException {
 
-
 		//配列の宣言および初期化処理を記述する
-
+		String[] voices = { "へい！らっしゃい！！",
+				"何にしますか！今日は活きのいいコハダが入ってますよ",
+				"まいどあり！！またどうぞ" };
 
 		System.out.println("Yさん：");
-		System.out.println("まず、MISAKI○の今の状態を確かめようかな。\n");
-
+		System.out.println("まず、MISAKI○の今の状態を確かめようかな。");
 
 		//三つのあいさつパターンの出力処理を記述する
+		for (int i = 0; i < voices.length; i++) {
+			System.out.println("\nあいさつパターン" + (i + 1) + "…「" + voices[i] + "」");
+		}
 
-
-		System.out.println("Yさん：");
-		System.out.println("うわぁ～。どれか変更しよう。\n");
+		System.out.println("\nYさん：");
+		System.out.println("うわぁ～。どれか変更しよう。");
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-
 		//入力処理および入力値の代入処理
+		System.out.println("\nどのパターンを変更しますか＞");
+		String patternString = br.readLine();
+		int pattern = Integer.parseInt(patternString);
 
+		System.out.println("\nあいさつを吹き込んでください＞");
+		String voice = br.readLine();
+
+		voices[pattern - 1] = voice;
 
 		System.out.println("\nYさん：");
 		System.out.println("よし。もう一度確かめてみよう。\n");
 
-
 		//三つのあいさつパターンの出力処理を記述する
+		for (int i = 0; i < voices.length; i++) {
+			System.out.println("\nあいさつパターン" + (i + 1) + "…「" + voices[i] + "」");
+		}
 
-
-		System.out.println("Yさん：");
+		System.out.println("\nYさん：");
 		System.out.println("まあ少しはマシになったかな。");
 	}
 }
