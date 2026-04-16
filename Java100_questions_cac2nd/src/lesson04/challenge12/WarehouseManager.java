@@ -99,9 +99,23 @@ public class WarehouseManager {
 
 		System.out.println("\n\nでした。直してきます...\n");
 
-
 		//ここに適切な値の挿入処理を記述する
+		boolean[] checkList = { false, false, false, false, false };
+		int place = 0;
 
+		for (int i = 0; i < wonderfulArray.length; i++) {
+			if (wonderfulArray[i] != 0) {
+				checkList[wonderfulArray[i] - 1] = true;
+			} else {
+				place = i;
+			}
+		}
+
+		for (int i = 0; i < checkList.length; i++) {
+			if (checkList[i] == false) {
+				wonderfulArray[place] = i + 1;
+			}
+		}
 
 		System.out.println("Yさん：");
 		System.out.println("直してきました。\n");
