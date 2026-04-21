@@ -17,26 +17,43 @@
 
 package lesson07.challenge14;
 
-
 //ここにIChiefTreasurerインターフェースを記述
-
+interface IChiefTreasurer {
+	public abstract void figure();
+}
 
 //ここにICelebrityインターフェースを記述
-
+interface ICelebrity {
+	public abstract void flex();
+}
 
 //ここにSamuraiクラスを記述
-
+class Samurai {
+};
 
 //ここにRetainerクラスを記述
+class Retainer extends Samurai implements IChiefTreasurer, ICelebrity {
+	@Override
+	public void figure() {
+		// TODO 自動生成されたメソッド・スタブ
+		System.out.println("藩の資産を計算するよ～。");
+	}
 
+	@Override
+	public void flex() {
+		// TODO 自動生成されたメソッド・スタブ
+		System.out.println("茶道を嗜むよ～。");
+	}
+}
 
 public class CastleTown {
 
-    public static void main(String[] args) {
-        System.out.println("藩士1：");
+	public static void main(String[] args) {
+		System.out.println("藩士1：");
 
-
-        //ここに適切な処理を記述;
-
-    }
+		//ここに適切な処理を記述;
+		Retainer retainer = new Retainer();
+		retainer.figure();
+		retainer.flex();
+	}
 }

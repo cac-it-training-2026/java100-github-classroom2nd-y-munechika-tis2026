@@ -59,16 +59,21 @@ public class Explorer {
 	public static void main(String[] args) throws IOException {
 
 		System.out.println("隊長：");
-		System.out.println("吊り橋発見！\n");
+		System.out.println("吊り橋発見！");
 
 		int fullLength = 300;
 		int member = 0;
 
-
 		//ここにwhile文を利用した処理を記述
+		while (member < 5) {
+			System.out.println("\n隊長\n" + (member + 1) + "人目が渡り始めたよ");
+			for (fullLength = 250; fullLength > 0; fullLength -= 50) {
+				System.out.println("\n隊長：\nまだ渡ってるよ");
+			}
+			member++;
+		}
 
-
-		System.out.println("全員渡り終わったよ！");
+		System.out.println("\n全員渡り終わったよ！");
 
 	}
 }

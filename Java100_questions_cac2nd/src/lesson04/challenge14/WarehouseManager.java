@@ -138,26 +138,95 @@ public class WarehouseManager {
 		int winPoint = 0;
 		int losePoint = 0;
 		int drawPoint = 0;
-		int stoneCount1 = 0;
-		int stoneCount2 = 0;
-		int scissorsCount1 = 0;
-		int scissorsCount2 = 0;
-		int paperCount1 = 0;
-		int paperCount2 = 0;
+		int blockCountY = 0;
+		int blockCountS = 0;
+		int scissorsCountY = 0;
+		int scissorsCountS = 0;
+		int paperCountY = 0;
+		int paperCountS = 0;
 
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 		System.out.println("Yさん：");
 		System.out.println("よし、今日はがんばるぞ！");
-		int[] jankenArray1 = new int[5];
-		int[] jankenArray2 = new int[5];
-
+		int[] jankenArrayY = new int[5];
+		int[] jankenArrayS = new int[5];
 
 		//Yさんのコンテナにじゃんけんの手を入れる処理を記述する。
+		int completeCount = 0;
+		int hand = 0;
+		String handString = "";
 
+		while (completeCount < 5) {
+			System.out.println("\nコンテナ" + (completeCount + 1) + "に入れるブロックを選択してください（1.グー、2.チョキ、3.パー）＞");
+			handString = br.readLine();
+			hand = Integer.parseInt(handString);
+
+			switch (hand - 1) {
+			case 0:
+				if (blockCountY < 2) {
+					jankenArrayY[completeCount] = 0;
+					blockCountY++;
+					completeCount++;
+				} else {
+					System.out.println("\nYさん：\nグーはもう使えません。");
+				}
+				break;
+			case 1:
+				if (scissorsCountY < 2) {
+					jankenArrayY[completeCount] = 1;
+					scissorsCountY++;
+					completeCount++;
+				} else {
+					System.out.println("\nYさん：\nチョキはもう使えません。");
+				}
+				break;
+			case 2:
+				if (paperCountY < 2) {
+					jankenArrayY[completeCount] = 2;
+					paperCountY++;
+					completeCount++;
+				} else {
+					System.out.println("\nYさん：\nパーはもう使えません。");
+				}
+				break;
+			default:
+				System.out.println("\nYさん：\nえ～。そんな手ないよ。");
+				break;
+			}
+		}
 
 		//Sさんのコンテナにじゃんけんの手を入れる処理を記述する。（ランダム）
+		completeCount = 0;
+		hand = 0;
 
+		while (completeCount < 5) {
+			hand = (int) (Math.random() * 10000 % 3);
+
+			switch (hand) {
+			case 0:
+				if (blockCountS < 2) {
+					jankenArrayS[completeCount] = 0;
+					blockCountS++;
+					completeCount++;
+				}
+				break;
+			case 1:
+				if (scissorsCountS < 2) {
+					jankenArrayS[completeCount] = 1;
+					scissorsCountS++;
+					completeCount++;
+				}
+				break;
+			case 2:
+				if (paperCountS < 2) {
+					jankenArrayS[completeCount] = 2;
+					paperCountS++;
+					completeCount++;
+				}
+				break;
+			}
+		}
 
 		for (int count = 0; count < 5; count++) {
 
@@ -165,38 +234,83 @@ public class WarehouseManager {
 			System.out.println("どの手を出そうかな～\n");
 
 			System.out.println("Sさん：");
-			System.out.println("はやぐ決めれ！腹減ってしゃねてば\n");
+			System.out.println("はやぐ決めれ！腹減ってしゃねてば");
 
-			int openNum1 = 0;
-
-
+			int openNumY = 0;
+			boolean opened = false;
 			//Yさんのどのコンテナをオープンするか入力してもらう処理を記述する。
+			while (opened == false) {
+				System.out.println("\nオープンするコンテナを決めてください＞");
+				String willNumString = br.readLine();
+				int willNum = Integer.parseInt(willNumString);
 
+				if (!(willNum == 1 || willNum == 2 || willNum == 3 || willNum == 4 || willNum == 5)) {
+					System.out.println("\nYさん：\nえ～。そんなコンテナないよ。");
+					continue;
+				} else if (jankenArrayY[willNum - 1] == 9) {
+					System.out.println("\nYさん；\nそのコンテナはもうオープンしちゃったよ。");
+					continue;
+				} else {
+					openNumY = willNum - 1;
+					opened = true;
+				}
 
-			int openNum2 = 0;
+			}
 
-
+			int openNumS = 0;
+			opened = false;
 			//Sさんのどのコンテナをオープンするか決定する処理を記述する。（ランダム）
-
+			while (opened == false) {
+				openNumS = (int) (Math.random() * 10000 % 5);
+				if (jankenArrayS[openNumS] == 9) {
+					continue;
+				} else {
+					opened = true;
+				}
+			}
 
 			System.out.println("\nYさん：");
-			System.out.println("よし、" + (openNum1 + 1) + "番コンテナだ！\n");
+			System.out.println("よし、" + (openNumY + 1) + "番コンテナだ！\n");
 
 			System.out.println("Sさん：");
-			System.out.println("こっちは" + (openNum2 + 1) + "番コンテナだべ！\n");
+			System.out.println("こっちは" + (openNumS + 1) + "番コンテナだべ！\n");
 
 			System.out.println("審判：");
 			System.out.println("ではオープンしてみましょう。\n");
 
 			System.out.println("審判：");
-			System.out.print("Yさん：" + handArray[jankenArray1[openNum1] - 1]);
+			System.out.print("Yさん：" + handArray[jankenArrayY[openNumY]]);
 			System.out.print(" VS ");
-			System.out.println("Sさん：" + handArray[jankenArray2[openNum2] - 1]);
+			System.out.println("Sさん：" + handArray[jankenArrayS[openNumS]]);
 			System.out.print("で、");
 
-
 			//1回ごとの勝敗判定およびメッセージの出力処理を記述する。
+			int diff = (jankenArrayY[openNumY] - jankenArrayS[openNumS] + 3) % 3;
+			switch (diff) {
+			case 0:
+				drawPoint++;
+				System.out.println("引き分けです。");
+				System.out.println("\nYさん：\nおしいな～");
+				System.out.println("\nSさん：\n実質おらの勝ちだべ。");
+				break;
+			case 1:
+				losePoint++;
+				System.out.println("Sさんの勝利です。");
+				System.out.println("\nYさん：\n次は勝つぞ！");
+				System.out.println("\nSさん：\n負けるわけねべ！");
+				break;
+			case 2:
+				winPoint++;
+				System.out.println("Yさんの勝利です。");
+				System.out.println("\nYさん：\nやった勝ちだ！");
+				System.out.println("\nSさん：\nあー、もうやんだぐなっできた...");
+				break;
+			default:
+				break;
+			}
 
+			jankenArrayY[openNumY] = 9;
+			jankenArrayS[openNumS] = 9;
 
 		}
 
