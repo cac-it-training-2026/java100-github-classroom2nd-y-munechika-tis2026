@@ -21,33 +21,47 @@
 
 package lesson07.challenge13;
 
-
 //ここにICelebrityインターフェースを記述
-
+interface ICelebrity {
+	public abstract void flex();
+}
 
 //ここにSamuraiクラスを記述
-
+class Samurai {
+};
 
 //ここにRetainerクラスを記述
-
+class Retainer extends Samurai implements ICelebrity {
+	@Override
+	public void flex() {
+		// TODO 自動生成されたメソッド・スタブ
+		System.out.println("茶道を嗜むよ～。");
+	}
+}
 
 //ここにRoninクラスを記述
-
+class Ronin extends Samurai implements ICelebrity {
+	@Override
+	public void flex() {
+		// TODO 自動生成されたメソッド・スタブ
+		System.out.println("塾を開くよ～。");
+	}
+}
 
 public class CastleTown {
 
-    public static void main(String[] args) {
-        System.out.println("藩士1：");
+	public static void main(String[] args) {
+		System.out.println("藩士1：");
 
+		//ここに適切な処理を記述
+		Retainer retainer = new Retainer();
+		retainer.flex();
 
-        //ここに適切な処理を記述
+		System.out.println("\n浪人1：");
 
+		//ここに適切な処理を記述
+		Ronin ronin = new Ronin();
+		ronin.flex();
 
-        System.out.println("\n浪人1：");
-
-
-        //ここに適切な処理を記述
-
-
-    }
+	}
 }

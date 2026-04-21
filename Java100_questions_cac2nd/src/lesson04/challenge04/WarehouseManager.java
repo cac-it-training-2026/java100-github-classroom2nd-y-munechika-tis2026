@@ -45,7 +45,7 @@ public class WarehouseManager {
 		//ここに配列の宣言および値の代入処理を記述する（for文）
 		int[] bags = new int[5];
 		for (int i = 0; i < 5; i++) {
-			bags[i] = (int) (Math.random() * 10 % 2) + 1;
+			bags[i] = (int) (Math.random() * 10000 % 5) + 1;
 		}
 
 		System.out.println("E主任：");
